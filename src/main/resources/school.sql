@@ -11,7 +11,7 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 15/09/2023 20:09:34
+ Date: 15/09/2023 21:07:31
 */
 
 SET NAMES utf8mb4;
@@ -82,6 +82,7 @@ CREATE TABLE `question`  (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
   `uid` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `usex` enum('male','female') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `upwd` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `umail` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
@@ -92,10 +93,10 @@ CREATE TABLE `user`  (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (333, 'female', '333', '333', 1);
-INSERT INTO `user` VALUES (444, 'male', '3344', '2244', 2);
-INSERT INTO `user` VALUES (445, 'male', '3344', '2244', 2);
-INSERT INTO `user` VALUES (446, 'male', '3344', '2244', 2);
-INSERT INTO `user` VALUES (448, 'male', '3344', '2244', 2);
+INSERT INTO `user` VALUES (333, '', 'female', '333', '333', 1);
+INSERT INTO `user` VALUES (444, '', 'male', '3344', '2244', 2);
+INSERT INTO `user` VALUES (445, '', 'male', '3344', '2244', 2);
+INSERT INTO `user` VALUES (446, '', 'male', '3344', '2244', 2);
+INSERT INTO `user` VALUES (448, '', 'male', '3344', '2244', 2);
 
 SET FOREIGN_KEY_CHECKS = 1;
