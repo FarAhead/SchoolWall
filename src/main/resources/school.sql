@@ -11,24 +11,83 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 14/09/2023 22:24:37
+ Date: 15/09/2023 20:09:34
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
+-- Table structure for answer
+-- ----------------------------
+DROP TABLE IF EXISTS `answer`;
+CREATE TABLE `answer`  (
+  `aid` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `qid` int(0) UNSIGNED NOT NULL,
+  `auid` int(0) UNSIGNED NOT NULL,
+  `acontent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `atime` datetime(0) NOT NULL,
+  `alikecount` int(255) UNSIGNED ZEROFILL NOT NULL,
+  PRIMARY KEY (`aid`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of answer
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for order
+-- ----------------------------
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order`  (
+  `oid` int(10) UNSIGNED ZEROFILL NOT NULL AUTO_INCREMENT,
+  `obid` int(0) UNSIGNED NULL DEFAULT NULL,
+  `osid` int(0) UNSIGNED NOT NULL,
+  `oprice` decimal(10, 2) NOT NULL,
+  `oname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `odescription` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `oimageurl` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `ocreatedate` datetime(0) NOT NULL,
+  `ofinishdate` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`oid`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for question
+-- ----------------------------
+DROP TABLE IF EXISTS `question`;
+CREATE TABLE `question`  (
+  `qid` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `quid` int(0) UNSIGNED NOT NULL,
+  `qtitle` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `qcontent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `qtime` datetime(0) NOT NULL,
+  `qbrowsecount` int(255) UNSIGNED ZEROFILL NOT NULL,
+  `qlikecount` int(255) UNSIGNED ZEROFILL NOT NULL,
+  `qanswercount` int(0) NOT NULL,
+  PRIMARY KEY (`qid`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of question
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `uID` int(0) NOT NULL AUTO_INCREMENT,
-  `uSex` enum('male','female') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `uPwd` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `uMail` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `uType` int(0) NOT NULL,
-  PRIMARY KEY (`uID`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  `uid` int(0) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `usex` enum('male','female') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `upwd` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `umail` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `utype` int(0) NOT NULL,
+  PRIMARY KEY (`uid`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 448 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
