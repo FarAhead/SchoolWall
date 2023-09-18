@@ -32,7 +32,7 @@ public class UserController {
 //        } else return "插入失败";
 //    }
 
-    @GetMapping("/query")  //查询所有用户
+    @GetMapping("/query")  //管理员查询所有用户
     public List query(){
 
         List<User> list =  userMapper.selectList(null);
@@ -40,7 +40,7 @@ public class UserController {
         return list;
     }
 
-    @PostMapping("insert")   //插入用户信息
+    @PostMapping("insert")   //用户注册，插入用户信息
     public Respon insert(User user){
         Respon respon = new Respon();
         int cnt = userMapper.insert(user);
@@ -49,4 +49,15 @@ public class UserController {
         } else respon.setRes(0);
         return respon;
     }
+
+    //对于忘记密码，可通过输入基本信息等方式来重置密码。
+    @PostMapping("reset")
+    public Respon reset(int id,String name,String mail,String pwd){
+        int cnt = userMapper.update(id,name,mail,pwd);
+        Respon respon = new Respon();
+        respon.setRes(cnt);
+        return respon;
+    }
+
+
 }

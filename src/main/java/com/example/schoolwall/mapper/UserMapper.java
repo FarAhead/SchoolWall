@@ -2,11 +2,8 @@ package com.example.schoolwall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.schoolwall.entity.User;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-
-import java.util.List;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 
@@ -19,5 +16,6 @@ import java.util.List;
 // }
 
 public interface UserMapper extends BaseMapper<User> {   //mybatis plus 提供的继承类，里面有许多功能
-
+    @Update("update user set upwd=#{pwd} where uid=#{id} and uname=#{name} and umail=#{mail}")
+    public int update(int id,String name,String mail,String pwd);
 }
