@@ -34,6 +34,7 @@ public class UserController {
 
     @GetMapping("/query")  //查询所有用户
     public List query(){
+
         List<User> list =  userMapper.selectList(null);
 //        System.out.println(list);
         return list;
