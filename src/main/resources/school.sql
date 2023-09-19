@@ -11,7 +11,7 @@
  Target Server Version : 80031 (8.0.31)
  File Encoding         : 65001
 
- Date: 19/09/2023 11:25:29
+ Date: 19/09/2023 18:05:49
 */
 
 SET NAMES utf8mb4;
@@ -77,6 +77,29 @@ CREATE TABLE `order`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for organization
+-- ----------------------------
+DROP TABLE IF EXISTS `organization`;
+CREATE TABLE `organization`  (
+  `zname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '组织名称',
+  `zid` int(4) UNSIGNED ZEROFILL NOT NULL COMMENT '组织代码',
+  `zstudent` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `zphone` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `zpwd` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `zmail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`zid`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of organization
+-- ----------------------------
+INSERT INTO `organization` VALUES ('校党委办公室', 1001, '付梦印', '15121732451', '666666', 'fumengyin@njust.edu.cn');
+INSERT INTO `organization` VALUES ('校青协', 1002, '王一涵', '15786544214', '123456', 'wangyihan@njust.edu.cn');
+INSERT INTO `organization` VALUES ('西部计划', 1003, '徐辉', '12445784124', '123456', 'xuhui@njust.edu.cn');
+INSERT INTO `organization` VALUES ('先锋频道', 1004, '黄辉', '14898547621', '123456', 'huanghui@njust.edu.cn');
+INSERT INTO `organization` VALUES ('校科协', 1005, '张雪峰', '15478246985', '000000', 'zhangxuefeng@njust.edu.cn');
+
+-- ----------------------------
 -- Table structure for question
 -- ----------------------------
 DROP TABLE IF EXISTS `question`;
@@ -110,27 +133,21 @@ INSERT INTO `question` VALUES (69, 1, '1', '1', '2023-09-01 12:11:30', 000000000
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `uid` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uid` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `uname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `usex` enum('male','female') CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `upwd` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `umail` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `utype` int NOT NULL,
   PRIMARY KEY (`uid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 92110783 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 921107820327 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (110, '郑宇唅', 'male', '123456', '12385796344@qq.com', 2);
-INSERT INTO `user` VALUES (111, '郑宇唅', 'male', '666666', '12385796344@qq.com', 2);
-INSERT INTO `user` VALUES (115, '郑宇唅', 'male', '123456', '12385796344@qq.com', 2);
-INSERT INTO `user` VALUES (116, '郑宇唅', 'male', '123456', '12385796344@qq.com', 2);
-INSERT INTO `user` VALUES (444, '', 'male', '3344', '2244', 2);
-INSERT INTO `user` VALUES (445, '', 'male', '3344', '2244', 2);
-INSERT INTO `user` VALUES (446, '', 'male', '3344', '2244', 2);
-INSERT INTO `user` VALUES (448, '', 'male', '3344', '2244', 2);
-INSERT INTO `user` VALUES (92110, 'zhengyuhan', 'male', '123456', '3143334009@qq.com', 2);
-INSERT INTO `user` VALUES (92110782, '陈旭疆', 'male', '123456', '12385796344@qq.com', 2);
+INSERT INTO `user` VALUES (921107810232, '叶黎', 'male', '888888', '3547896412@qq.com', 2);
+INSERT INTO `user` VALUES (921107820242, '余承东', 'male', '061600', 'yuchengdong@qq.com', 2);
+INSERT INTO `user` VALUES (921107820244, '郑宇唅', 'male', '123456', '3143334009@qq.com', 2);
+INSERT INTO `user` VALUES (921107820326, '陈旭疆', 'male', '123456', '12385796344@qq.com', 2);
 
 SET FOREIGN_KEY_CHECKS = 1;
