@@ -23,4 +23,5 @@ public class Question {
     private int qbrowsecount;  //浏览次数
     private int qlikecount;  //点赞次数
     private int qanswercount; //回答次数
+    private int qlabel;  //标签
 }

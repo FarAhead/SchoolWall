@@ -1,5 +1,6 @@
 package com.example.schoolwall.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.schoolwall.entity.Respon;
 import com.example.schoolwall.entity.User;
 import com.example.schoolwall.mapper.UserMapper;
@@ -40,7 +41,16 @@ public class UserController {
         return list;
     }
 
-    @PostMapping("insert")   //用户注册，插入用户信息
+    @GetMapping("/delete") //管理员根据用户id删除该用户
+    public Respon delete(User user){
+        Respon respon = new Respon();
+//        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
+//        queryWrapper.eq("uid",idd);
+        respon.setRes(userMapper.del(user.getUid()));  //deleteById不是
+        return respon;
+    }
+
+    @PostMapping("insert")   //用户注册，插入用户信息，管理员添加用户
     public Respon insert(User user){
         Respon respon = new Respon();
         int cnt = userMapper.insert(user);
@@ -49,6 +59,7 @@ public class UserController {
         } else respon.setRes(0);
         return respon;
     }
+
 
     //对于忘记密码，可通过输入基本信息等方式来重置密码。
     @PostMapping("reset")

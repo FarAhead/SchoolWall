@@ -16,11 +16,6 @@ public class LoginController {
     @Autowired
     private LoginMapper loginMapper;
 
-//    @GetMapping("/login")
-//    public String login(){
-//        return "登陆成功";
-//    }
-
     @GetMapping("/login")
     public Respon login(int id, String pd){
         Respon respon = new Respon();
