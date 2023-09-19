@@ -6,4 +6,5 @@ import lombok.Data;
 public class Respon {
     private int res;
     private User user;
+    private Organization organization;
 }

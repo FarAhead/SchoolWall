@@ -8,7 +8,7 @@ import java.lang.reflect.Type;
 @Data
 public class User {
     @TableId(value = "uid",type = IdType.AUTO)
-    private int uid;
+    private long uid;
     private String uname;
     private String usex;
     private String upwd;
