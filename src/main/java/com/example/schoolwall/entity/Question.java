@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 public class Question {
     @TableId(value = "qid",type = IdType.AUTO)
     private int qid;
-    private int quid;
+    private long quid;
     private String qtitle;
     private String qcontent;
 //    @DateTimeFormat(pattern = "yyyy-MM-dd")

@@ -19,8 +19,11 @@ import org.apache.ibatis.annotations.Update;
 
 public interface UserMapper extends BaseMapper<User> {   //mybatis plus 提供的继承类，里面有许多功能
 
-    @Delete("delete from user where uid=#{uid}")
+    @Delete("delete from user where uid=#{uid}") //根据id删除某个用户
     public int del(long uid);
-    @Update("update user set upwd=#{pwd} where uid=#{id} and uname=#{name} and umail=#{mail}")
+    @Update("update user set upwd=#{pwd} where uid=#{id} and uname=#{name} and umail=#{mail}") //修改密码
     public int update(long id,String name,String mail,String pwd);
+
+    @Update("update user set upwd=#{pwd} where uid=#{id}") //管理员重置密码
+    public int update2(long id,String pwd);
 }

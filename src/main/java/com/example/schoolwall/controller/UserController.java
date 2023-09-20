@@ -26,6 +26,7 @@ public class UserController {
         return Result.success(list);
     }
 
+
     @GetMapping("/delete") //管理员根据用户id删除该用户
     public Result delete(@RequestBody User user){
 //        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
@@ -35,6 +36,14 @@ public class UserController {
         else return Result.error();
     }
 
+    @GetMapping("/updpwd") //管理员重置某位用户的密码
+    public Result upd(@RequestBody User user){
+        int cnt = userMapper.update2(user.getUid(),user.getUpwd());
+        if(cnt>0)return Result.success();  //deleteById不是
+        else return Result.error();
+    }
+
+
     @PostMapping("/insert")   //用户注册，插入用户信息，管理员添加用户
     public Result insert(@RequestBody User user){
         int cnt = userMapper.insert(user);
@@ -43,7 +52,7 @@ public class UserController {
         } else return Result.error();
     }
 
-    @PostMapping("/oinsert")   //用户注册，插入用户信息，管理员添加用户
+    @PostMapping("/oinsert")   //组织注册，插入组织信息，管理员添加组织
     public Result insert(@RequestBody Organization organization){
         int cnt = organizationMapper.insert(organization);
         if(cnt>0){

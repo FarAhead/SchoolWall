@@ -28,13 +28,13 @@ public class LoginController {
         queryWrapper.eq("uid",user.getUid());
         List<User> list = userMapper.selectList(queryWrapper);
         if (list.isEmpty()) {
-            return Result.error(Constants.CODE_400, "参数错误");  //用户名不存在
+            return Result.error(Constants.CODE_210, "用户名不存在");  //用户名不存在
         } else {
             queryWrapper.eq("uid",user.getUid());
             queryWrapper.eq("upwd",user.getUpwd());
             List<User> list2 = userMapper.selectList(queryWrapper);
             if(list2.isEmpty()){
-                return Result.error(Constants.CODE_400, "参数错误");  //密码错误
+                return Result.error(Constants.CODE_220, "密码错误");  //密码错误
             }
             else
                 return Result.success(list2.get(0)); //说明用户名跟密码都在数据库中,登录成功,返回该user
@@ -55,16 +55,15 @@ public class LoginController {
         queryWrapper.eq("zid",organization.getZid());
         List<Organization> list = organizationMapper.selectList(queryWrapper);
         if (list.isEmpty()) {
-            return Result.error(Constants.CODE_400, "参数错误");  //组织不存在
+            return Result.error(Constants.CODE_210, "组织不存在");  //组织不存在
         } else {
             queryWrapper.eq("zid", organization.getZid());
             queryWrapper.eq("zpwd",organization.getZpwd());
             List<Organization> list2 = organizationMapper.selectList(queryWrapper);
             if(list2.isEmpty()){
-                return Result.error(Constants.CODE_400, "参数错误");  //密码错误
+                return Result.error(Constants.CODE_220, "密码错误");  //密码错误
             }
-            else
-                return Result.success(list2.get(0));
+            else  return Result.success(list2.get(0));
         }
     }
 

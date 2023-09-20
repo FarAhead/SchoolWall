@@ -5,11 +5,9 @@ import com.example.schoolwall.entity.Respon;
 import com.example.schoolwall.entity.User;
 import com.example.schoolwall.mapper.QuestionMapper;
 import com.example.schoolwall.mapper.UserMapper;
+import com.example.schoolwall.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,20 +17,18 @@ public class QuestionController {
     @Autowired   //spring的功能,自动把UserMapper实例化出来的对象注入注入userMapper
     private QuestionMapper questionMapper;
 
-    @PostMapping("/add")  //新建一个帖子
-    public Respon add(Question question){
-        Respon respon = new Respon();
+    @PostMapping("/add")  //发布一个帖子
+    public Result add(@RequestBody Question question){
         int cnt = questionMapper.insert(question);
         if(cnt>0){
-            respon.setRes(1);
-        } else respon.setRes(0);
-        return respon;
+            return Result.success();
+        } else return Result.error();
     }
 
     @GetMapping("/queryall")  //查询所有的帖子
-    public List query(){
+    public Result query(){
         List<Question> list =  questionMapper.selectList(null);
-        return list;
+        return Result.success(list);
     }
 
 
