@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 @Data
 public class Notice {
     private int nid;
-    private int nzid;
+    private int uid;
     private String ntitle;
     private String ncontent;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")

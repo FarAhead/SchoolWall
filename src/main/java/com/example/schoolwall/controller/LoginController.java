@@ -3,13 +3,11 @@ package com.example.schoolwall.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.schoolwall.entity.Organization;
-import com.example.schoolwall.entity.Respon;
 import com.example.schoolwall.entity.User;
 import com.example.schoolwall.mapper.OrganizationMapper;
 import com.example.schoolwall.mapper.UserMapper;
 import com.example.schoolwall.result.Constants;
 import com.example.schoolwall.result.Result;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,13 +50,13 @@ public class LoginController {
     @GetMapping("/org")    //组织登录
     public Result login(@RequestBody Organization organization){
         QueryWrapper<Organization> queryWrapper = new QueryWrapper<Organization>();
-        queryWrapper.eq("zid",organization.getZid());
+        queryWrapper.eq("uid",organization.getUid());
         List<Organization> list = organizationMapper.selectList(queryWrapper);
         if (list.isEmpty()) {
             return Result.error(Constants.CODE_210, "组织不存在");  //组织不存在
         } else {
-            queryWrapper.eq("zid", organization.getZid());
-            queryWrapper.eq("zpwd",organization.getZpwd());
+            queryWrapper.eq("uid", organization.getUid());
+            queryWrapper.eq("upwd",organization.getUpwd());
             List<Organization> list2 = organizationMapper.selectList(queryWrapper);
             if(list2.isEmpty()){
                 return Result.error(Constants.CODE_220, "密码错误");  //密码错误
@@ -70,7 +68,7 @@ public class LoginController {
     //对于组织忘记密码，可通过输入负责人，负责人邮箱，组织代码方式来重置密码。
     @PostMapping("/org/reset")
     public Result reset(@RequestBody Organization organization){
-        int cnt = organizationMapper.update(organization.getZid(), organization.getZstudent(), organization.getZmail(),organization.getZpwd());
+        int cnt = organizationMapper.update(organization.getUid(), organization.getZstudent(), organization.getZmail(),organization.getUpwd());
         if(cnt>0) return Result.success();
         return Result.error();
     }

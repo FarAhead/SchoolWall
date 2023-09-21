@@ -7,9 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Update;
 @Mapper
 public interface OrganizationMapper extends BaseMapper<Organization> {
-    @Update("update organization set zpwd=#{pwd} where zid=#{id} and zstudent=#{name} and zmail=#{mail}")
+    @Update("update organization set upwd=#{pwd} where uid=#{id} and zstudent=#{name} and zmail=#{mail}")
     public int update(int id,String name,String mail,String pwd);
 
-    @Delete("delete from organization where zid=#{idd}")
+    @Delete("delete from organization where uid=#{idd}")
     public int del(int idd);
 }

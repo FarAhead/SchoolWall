@@ -3,8 +3,19 @@ package com.example.schoolwall.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.schoolwall.entity.Question;
 import com.example.schoolwall.entity.User;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface QuestionMapper extends BaseMapper<Question> {
+
+    @Update("update question set qbrowsecount=qbrowsecount+1 where qid= #{id}") //访问量加一
+    public int browse(int id);
+    @Update("update question set qlikecount=qlikecount+1 where qid= #{id}") //喜欢加一
+    public int like(int id);
+    @Update("update question set qlikecount=qlikecount-1 where qid= #{id}") //喜欢加一
+    public int unlike(int id);
+    @Delete("delete from question where qid=#{id}")
+    public int del(int id);
 }

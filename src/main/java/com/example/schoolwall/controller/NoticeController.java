@@ -2,11 +2,7 @@ package com.example.schoolwall.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.schoolwall.entity.Notice;
-import com.example.schoolwall.entity.Question;
-import com.example.schoolwall.entity.Respon;
-import com.example.schoolwall.entity.User;
 import com.example.schoolwall.mapper.NoticeMapper;
-import com.example.schoolwall.mapper.UserMapper;
 import com.example.schoolwall.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -45,7 +41,7 @@ public class NoticeController {
     @GetMapping("query")   //社团组织查询所有自己已发布的公告
     public Result query(@RequestBody Notice notice){
         QueryWrapper<Notice> queryWrapper = new QueryWrapper<Notice>();
-        queryWrapper.eq("nzid",notice.getNzid());
+        queryWrapper.eq("uid",notice.getUid());
         List<Notice> list = noticeMapper.selectList(queryWrapper);
         if(list.isEmpty()){
             return Result.error();

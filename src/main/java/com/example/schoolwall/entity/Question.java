@@ -13,12 +13,13 @@ import java.sql.Timestamp;
 public class Question {
     @TableId(value = "qid",type = IdType.AUTO)
     private int qid;
-    private long quid;
+    private long uid;
     private String qtitle;
     private String qcontent;
 //    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Timestamp qtime = new Timestamp(System.currentTimeMillis());
+
 
     private int qbrowsecount;  //浏览次数
     private int qlikecount;  //点赞次数

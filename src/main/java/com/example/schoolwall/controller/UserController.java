@@ -1,8 +1,6 @@
 package com.example.schoolwall.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.schoolwall.entity.Organization;
-import com.example.schoolwall.entity.Respon;
 import com.example.schoolwall.entity.User;
 import com.example.schoolwall.mapper.OrganizationMapper;
 import com.example.schoolwall.mapper.UserMapper;
