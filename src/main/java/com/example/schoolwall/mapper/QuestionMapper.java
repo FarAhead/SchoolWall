@@ -1,11 +1,13 @@
 package com.example.schoolwall.mapper;
 
+import com.alibaba.druid.sql.dialect.oracle.ast.stmt.OracleCreateTableStatement;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.schoolwall.entity.Organization;
 import com.example.schoolwall.entity.Question;
 import com.example.schoolwall.entity.User;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 @Mapper
 public interface QuestionMapper extends BaseMapper<Question> {
@@ -27,4 +29,26 @@ public interface QuestionMapper extends BaseMapper<Question> {
     public int unrep(int id);
     @Delete("delete from question where qid=#{id}")  //删除帖子
     public int del(int id);
+
+    @Select("select * from question")
+    @Results({
+            @Result(column = "qid",property = "qid"),
+            @Result(column = "uid",property = "uid"),
+            @Result(column = "qtitle",property = "qtitle"),
+            @Result(column = "qcontent",property = "qcontent"),
+            @Result(column = "qtime",property = "qtime"),
+            @Result(column = "qbrowsecount",property = "qbrowsecount"),
+            @Result(column = "qlikecount",property = "qlikecount"),
+            @Result(column = "qanswercount",property = "qanswercount"),
+            @Result(column = "qlabel",property = "qlabel"),
+            @Result(column = "qcollectcount",property = "qcollectcount"),
+            @Result(column = "uid",property = "user",javaType = User.class,
+            one = @One(select = "com.example.schoolwall.mapper.UserMapper.selectById")
+            ),
+            @Result(column = "uid",property = "organization",javaType = Organization.class,
+                    one = @One(select = "com.example.schoolwall.mapper.OrganizationMapper.selectById")
+            )
+    })
+    List<Question> selectAll();
+
 }

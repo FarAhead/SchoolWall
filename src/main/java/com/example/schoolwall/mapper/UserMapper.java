@@ -5,6 +5,7 @@ import com.example.schoolwall.entity.Organization;
 import com.example.schoolwall.entity.User;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 @Mapper
@@ -26,4 +27,7 @@ public interface UserMapper extends BaseMapper<User> {   //mybatis plus 提供�
 
     @Update("update user set upwd=#{pwd} where uid=#{id}") //管理员重置密码
     public int update2(long id,String pwd);
+
+    @Select("select * from user where uid=#{uid}")
+    public User selectById(long uid);
 }

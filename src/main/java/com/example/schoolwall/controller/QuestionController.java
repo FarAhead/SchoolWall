@@ -35,10 +35,9 @@ public class QuestionController {
 
     @PostMapping("/queryall")  //查询所有的帖子
     public Result query(){
-        List<Question> list =  questionMapper.selectList(null);
+        List list =  questionMapper.selectAll();
         return Result.success(list);
     }
-
 
     @PostMapping("/browse") //点击查看，该帖子访问量+1
     public Result browse(@RequestBody Question question){
