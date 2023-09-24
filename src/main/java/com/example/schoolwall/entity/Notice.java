@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 public class Notice {
     private int nid;
     private int uid;
+    private int checked;  //默认为零，表示还没被审核
     private String ntitle;
     private String ncontent;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")

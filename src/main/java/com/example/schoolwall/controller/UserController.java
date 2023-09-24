@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController  //接收前段的请求，默认会将返回的对象数据转换成JSON格式
 @RequestMapping("/user")
 public class UserController {
@@ -18,14 +18,14 @@ public class UserController {
     private UserMapper userMapper;
     @Autowired
     private OrganizationMapper organizationMapper;
-    @GetMapping("/query")  //管理员查询所有用户
+    @PostMapping("/query")  //管理员查询所有用户
     public Result query(){
         List<User> list =  userMapper.selectList(null);
         return Result.success(list);
     }
 
 
-    @GetMapping("/delete") //管理员根据用户id删除该用户
+    @PostMapping("/delete") //管理员根据用户id删除该用户
     public Result delete(@RequestBody User user){
 //        QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
 //        queryWrapper.eq("uid",idd);
@@ -34,7 +34,7 @@ public class UserController {
         else return Result.error();
     }
 
-    @GetMapping("/updpwd") //管理员重置某位用户的密码
+    @PostMapping("/updpwd") //管理员重置某位用户的密码
     public Result upd(@RequestBody User user){
         int cnt = userMapper.update2(user.getUid(),user.getUpwd());
         if(cnt>0)return Result.success();  //deleteById不是

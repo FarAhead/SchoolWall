@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+@CrossOrigin
 @RestController  //默认会将返回的对象数据转换成JSON格式
 @RequestMapping("/login")
 public class LoginController {
@@ -20,12 +21,14 @@ public class LoginController {
     @Autowired
     private OrganizationMapper organizationMapper;
     //管理员账号就一个，登录的话可以直接在前端设置
-    @GetMapping("/user")    //普通用户登录
+    @PostMapping("/user")    //普通用户登录
     public Result login(@RequestBody User user){
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         queryWrapper.eq("uid",user.getUid());
+//        System.out.println("----------"+user.getUid()+"-----------------"+user.getUpwd());
         List<User> list = userMapper.selectList(queryWrapper);
         if (list.isEmpty()) {
+//            System.out.println("error!--------------");
             return Result.error(Constants.CODE_210, "用户名不存在");  //用户名不存在
         } else {
             queryWrapper.eq("uid",user.getUid());
@@ -47,7 +50,7 @@ public class LoginController {
         return Result.error();
     }
 
-    @GetMapping("/org")    //组织登录
+    @PostMapping("/org")    //组织登录
     public Result login(@RequestBody Organization organization){
         QueryWrapper<Organization> queryWrapper = new QueryWrapper<Organization>();
         queryWrapper.eq("uid",organization.getUid());

@@ -14,4 +14,5 @@ public class Answer {
     private String acontent; //回答内容
     private Timestamp atime; //回答时间
     private Timestamp alikecount; //回答点赞次数
+    private int reported;  //是否被举报
 }

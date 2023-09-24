@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController  //默认会将返回的对象数据转换成JSON格式
 @RequestMapping("/question")
 public class QuestionController {
@@ -25,7 +25,7 @@ public class QuestionController {
         } else return Result.error();
     }
 
-    @GetMapping("del") //删除某个帖子
+    @PostMapping("del") //删除某个帖子
     public Result del(@RequestBody Question question){
         int cnt = questionMapper.del(question.getQid());
         if(cnt>0){
@@ -33,14 +33,14 @@ public class QuestionController {
         } else return Result.error();
     }
 
-    @GetMapping("/queryall")  //查询所有的帖子
+    @PostMapping("/queryall")  //查询所有的帖子
     public Result query(){
         List<Question> list =  questionMapper.selectList(null);
         return Result.success(list);
     }
 
 
-    @GetMapping("/browse") //点击查看，该帖子访问量+1
+    @PostMapping("/browse") //点击查看，该帖子访问量+1
     public Result browse(@RequestBody Question question){
         int cnt = questionMapper.browse(question.getQid());
         if(cnt>0){
