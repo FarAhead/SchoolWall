@@ -9,6 +9,7 @@ public class Lik {
     @TableId(value = "id",type = IdType.AUTO)
     private int id;
     private int qid;
+    private int typ; //id跟qid之间的关系类型是1赞同还是2收藏
     private long uid;
 
 }
