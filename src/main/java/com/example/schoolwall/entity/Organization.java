@@ -10,4 +10,5 @@ public class Organization {
     private String zphone; //联系电话
     private String upwd; //密码
     private String zmail; //邮箱
+    private String zavatar; //头像
 }

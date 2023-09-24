@@ -13,7 +13,7 @@ import java.util.List;
 @RestController  //默认会将返回的对象数据转换成JSON格式
 @RequestMapping("/question")
 public class QuestionController {
-    @Autowired   //spring的功能,自动把UserMapper实例化出来的对象注入注入userMapper
+    @Autowired
     private QuestionMapper questionMapper;
     @Autowired
     private LikMapper likMapper;
