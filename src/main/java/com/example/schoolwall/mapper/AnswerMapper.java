@@ -12,4 +12,5 @@ public interface AnswerMapper extends BaseMapper<Answer> {
     public int del(int id);
     @Update("update answer set reported=0 where aid=#{id} ")  //撤销审核
     public int agre(int id);
+
 }

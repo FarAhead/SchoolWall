@@ -10,6 +10,8 @@ public interface OrganizationMapper extends BaseMapper<Organization> {
     @Update("update organization set upwd=#{pwd} where uid=#{id} and zstudent=#{name} and zmail=#{mail}")
     public int update(int id,String name,String mail,String pwd);
 
+    @Update("update organization set utype=1 where uid=#{id}")
+    public int upd(int id);
     @Delete("delete from organization where uid=#{idd}")
     public int del(int idd);
 }

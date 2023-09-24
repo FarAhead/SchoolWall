@@ -53,6 +53,7 @@ public class UserController {
     @PostMapping("/oinsert")   //组织注册，插入组织信息，管理员添加组织
     public Result insert(@RequestBody Organization organization){
         int cnt = organizationMapper.insert(organization);
+        int cnt1 = organizationMapper.upd(organization.getUid());
         if(cnt>0){
             return Result.success();
         } else return Result.error();

@@ -16,4 +16,5 @@ public class User {
     private String uavatar;  //头像
     private int utype;
 
+
 }

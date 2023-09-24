@@ -21,6 +21,10 @@ public interface QuestionMapper extends BaseMapper<Question> {
     @Update("update question set qcollectcount=qcollectcount-1 where qid= #{id}") //取消收藏
     public int uncoll(int id);
 
+    @Update("update question set qanswercount=qanswercount+1 where qid= #{id}") //回答数加一
+    public int rep(int id);
+    @Update("update question set qanswercount=qanswercount-1 where qid= #{id}") //回答数减一
+    public int unrep(int id);
     @Delete("delete from question where qid=#{id}")  //删除帖子
     public int del(int id);
 }

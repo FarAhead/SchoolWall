@@ -17,10 +17,12 @@ import java.util.List;
 public class AnswerController {
     @Autowired
     private AnswerMapper answerMapper;
-
+    @Autowired
+    private QuestionMapper questionMapper;
     @PostMapping("/reply") //回答一个帖子
     public Result repl(@RequestBody Answer answer){
         int cnt = answerMapper.insert(answer);
+        int cnt1 =questionMapper.rep(answer.getQid());
         if(cnt>0){
             return Result.success();
         } else return Result.error();
@@ -30,6 +32,14 @@ public class AnswerController {
     public Result query(@RequestBody Answer answer){
         QueryWrapper<Answer> queryWrapper = new QueryWrapper<Answer>();
         queryWrapper.eq("qid",answer.getQid());
+        List<Answer> list =  answerMapper.selectList(queryWrapper);
+        return Result.success(list);
+    }
+
+    @PostMapping("query1")   //查询某用户的所有回答
+    public Result query1(@RequestBody Answer answer){
+        QueryWrapper<Answer> queryWrapper = new QueryWrapper<Answer>();
+        queryWrapper.eq("uid",answer.getUid());
         List<Answer> list =  answerMapper.selectList(queryWrapper);
         return Result.success(list);
     }
@@ -45,6 +55,7 @@ public class AnswerController {
     @PostMapping("del")   //管理员或用户删除某回答
     public Result del(@RequestBody Answer answer){
         int cnt = answerMapper.del(answer.getAid());
+        int cnt1 = questionMapper.unrep(answer.getQid());
         if(cnt>0){
             return Result.success();
         } else return Result.error();

@@ -11,4 +11,5 @@ public class Organization {
     private String upwd; //密码
     private String zmail; //邮箱
     private String zavatar; //头像
+    private int utype;
 }
