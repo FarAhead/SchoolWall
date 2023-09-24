@@ -23,7 +23,6 @@ public class Question {
 //    @TableField(exist = false)
     private User user;
 //    @TableField(exist = false)
-    private Organization organization;
     private int qbrowsecount;  //浏览次数
     private int qlikecount;  //点赞次数
     private int qanswercount; //回答次数

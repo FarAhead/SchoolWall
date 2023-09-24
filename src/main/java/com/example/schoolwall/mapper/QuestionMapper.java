@@ -45,9 +45,6 @@ public interface QuestionMapper extends BaseMapper<Question> {
             @Result(column = "uid",property = "user",javaType = User.class,
             one = @One(select = "com.example.schoolwall.mapper.UserMapper.selectById")
             ),
-            @Result(column = "uid",property = "organization",javaType = Organization.class,
-                    one = @One(select = "com.example.schoolwall.mapper.OrganizationMapper.selectById")
-            )
     })
     List<Question> selectAll();
 
