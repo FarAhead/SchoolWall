@@ -28,6 +28,6 @@ public interface UserMapper extends BaseMapper<User> {   //mybatis plus 提供�
     @Update("update user set upwd=#{pwd} where uid=#{id}") //管理员重置密码
     public int update2(long id,String pwd);
 
-    @Select("select * from user where uid=#{uid}")
+    @Select("select uid,uname,uavatar from user where uid=#{uid}")
     public User selectById(long uid);
 }
