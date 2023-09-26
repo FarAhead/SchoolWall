@@ -48,4 +48,21 @@ public interface QuestionMapper extends BaseMapper<Question> {
     })
     List<Question> selectAll();
 
+    @Select("select * from question where uid=#{id}")
+    @Results({
+            @Result(column = "qid",property = "qid"),
+            @Result(column = "uid",property = "uid"),
+            @Result(column = "qtitle",property = "qtitle"),
+            @Result(column = "qcontent",property = "qcontent"),
+            @Result(column = "qtime",property = "qtime"),
+            @Result(column = "qbrowsecount",property = "qbrowsecount"),
+            @Result(column = "qlikecount",property = "qlikecount"),
+            @Result(column = "qanswercount",property = "qanswercount"),
+            @Result(column = "qlabel",property = "qlabel"),
+            @Result(column = "qcollectcount",property = "qcollectcount"),
+            @Result(column = "uid",property = "user",javaType = User.class,
+                    one = @One(select = "com.example.schoolwall.mapper.UserMapper.selectById")
+            ),
+    })
+    List<Question> selectAll2(long id);
 }
