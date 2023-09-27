@@ -11,7 +11,7 @@
  Target Server Version : 80031 (8.0.31)
  File Encoding         : 65001
 
- Date: 25/09/2023 00:38:42
+ Date: 26/09/2023 22:50:02
 */
 
 SET NAMES utf8mb4;
@@ -39,6 +39,31 @@ INSERT INTO `answer` VALUES (1, 70, 921107820244, '今天拿了好多纪念品',
 INSERT INTO `answer` VALUES (3, 70, 921107820244, '今天还看了晚会', '2023-09-21 13:33:11', 11, 0);
 INSERT INTO `answer` VALUES (4, 72, 921107820244, '好喝', '2023-09-21 13:33:11', 11, 0);
 INSERT INTO `answer` VALUES (5, 72, 921107820244, '瑞幸买一送一啦', '2023-09-21 13:33:11', 11, 0);
+
+-- ----------------------------
+-- Table structure for commodity
+-- ----------------------------
+DROP TABLE IF EXISTS `commodity`;
+CREATE TABLE `commodity`  (
+  `cid` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `price` decimal(10, 2) UNSIGNED NOT NULL,
+  `uid` bigint UNSIGNED NOT NULL,
+  `cname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '商品名称',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '商品描述',
+  `ctime` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '发布时间',
+  `sold` int NOT NULL COMMENT '是否被购买',
+  `ctype` int NOT NULL COMMENT '商品类型',
+  `cavatar` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`cid`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of commodity
+-- ----------------------------
+INSERT INTO `commodity` VALUES (1, 78.00, 921107820244, '南理工限定月饼', '嘎嘎好吃', '2023-09-01 12:12:11', 0, 1, 'xxxxxx');
+INSERT INTO `commodity` VALUES (2, 78.00, 921107820244, '南理工限定笔记本', '嘎嘎好用', '2023-09-01 12:12:11', 0, 1, 'xxxxxx');
+INSERT INTO `commodity` VALUES (3, 78.99, 921107820244, '生椰拿铁', '丝滑，好喝', '2023-09-26 20:40:37', 0, 1, 'xxxxxx');
+INSERT INTO `commodity` VALUES (4, 99.00, 921107820244, '自行车', '轻便，99新', '2023-09-01 12:12:11', 0, 1, 'xxxxxx');
 
 -- ----------------------------
 -- Table structure for lik
@@ -98,7 +123,7 @@ CREATE TABLE `order`  (
   `ocreatedate` datetime NOT NULL,
   `ofinishdate` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`oid`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of order
@@ -154,7 +179,7 @@ CREATE TABLE `question`  (
 -- ----------------------------
 INSERT INTO `question` VALUES (70, 921107820244, '南理工建校七十周年', '今天学校举办了好多活动，我好开心', '2023-09-19 13:23:11', 135, 24, 16, 1, 0);
 INSERT INTO `question` VALUES (72, 921107820244, '瑞幸咖啡买一送一', '酱香拿铁今日上新啦！！！', '2023-09-19 13:33:11', 6, 98, 19, 1, 0);
-INSERT INTO `question` VALUES (73, 1001, '林俊杰JJ20', '今晚开始抢票啦！！！', '2023-09-21 13:33:11', 234, 66, 18, 1, 0);
+INSERT INTO `question` VALUES (73, 921107820242, '林俊杰JJ20', '今晚开始抢票啦！！！', '2023-09-21 13:33:11', 234, 66, 18, 1, 0);
 
 -- ----------------------------
 -- Table structure for user
@@ -177,8 +202,8 @@ CREATE TABLE `user`  (
 INSERT INTO `user` VALUES (921107810219, '叶黎', 'male', '888888', '3547896412@qq.com', 2, 'src/main/resources/a.png');
 INSERT INTO `user` VALUES (921107810232, '叶黎', 'male', '888888', '3547896412@qq.com', 2, '');
 INSERT INTO `user` VALUES (921107810234, '叶黎', 'male', '888888', '3547896412@qq.com', 2, '');
-INSERT INTO `user` VALUES (921107820242, '余承东', 'male', '061600', 'yuchengdong@qq.com', 2, '');
-INSERT INTO `user` VALUES (921107820244, '郑宇唅', 'male', '888888', '3143334009@qq.com', 2, '');
+INSERT INTO `user` VALUES (921107820242, '余承东', 'male', '061600', 'yuchengdong@qq.com', 2, 'src/main/resources/a.png');
+INSERT INTO `user` VALUES (921107820244, '郑宇唅', 'male', '888888', '3143334009@qq.com', 2, 'D:/develop/SchoolWall/src/main/resources/head\\b.png');
 INSERT INTO `user` VALUES (921107820326, '陈旭疆', 'male', '123456', '12385796344@qq.com', 2, '');
 
 SET FOREIGN_KEY_CHECKS = 1;
