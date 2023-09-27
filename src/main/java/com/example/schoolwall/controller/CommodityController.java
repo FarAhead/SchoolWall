@@ -7,8 +7,12 @@ import com.example.schoolwall.mapper.CommodityMapper;
 import com.example.schoolwall.mapper.OrdMapper;
 import com.example.schoolwall.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @CrossOrigin
@@ -28,6 +32,30 @@ public class CommodityController {
         } else return Result.error();
     }
 
+    @Value("${upload.path3}")
+    private String uploadPath;
+    @PostMapping("/upload")
+    public Result uploadFile(@RequestParam("cid") Long id,@RequestParam("cavatar") MultipartFile file) {
+        try {
+            String originalFilename = file.getOriginalFilename();
+            String filePath = uploadPath + File.separator + originalFilename;
+            File dest = new File(filePath);
+            file.transferTo(dest);
+
+            // 构建文件的URL
+            String fileUrl = filePath; // 这里返回文件的绝对路径
+
+            // 更新数据库中商品的cavazar字段
+            commodityMapper.updateCAvatar(id, fileUrl);
+
+            // 返回成功响应
+            return Result.success(fileUrl);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // 返回上传失败的响应
+            return Result.error();
+        }
+    }
     @PostMapping("/query")  //查询所有在售商品
     public Result query(){
         QueryWrapper<Commodity> queryWrapper = new QueryWrapper<Commodity>();
