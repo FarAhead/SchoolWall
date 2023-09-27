@@ -55,8 +55,30 @@ public class UserController {
             return Result.error();
         }
     }
+    @Value("${upload.path2}")
+    private String uploadPath2;
+    @PostMapping("/upload2")
+    public Result uploadFile2(@RequestParam("uid") Long id,@RequestParam("zavatar") MultipartFile file) {
+        try {
+            String originalFilename = file.getOriginalFilename();
+            String filePath = uploadPath2 + File.separator + originalFilename;
+            File dest = new File(filePath);
+            file.transferTo(dest);
 
+            // 构建文件的URL
+            String fileUrl = filePath; // 这里返回文件的绝对路径
 
+            // 更新数据库中组织的zavazar字段
+            organizationMapper.updateUserAvatar(id, fileUrl);
+
+            // 返回成功响应
+            return Result.success(fileUrl);
+        } catch (IOException e) {
+            e.printStackTrace();
+            // 返回上传失败的响应
+            return Result.error();
+        }
+    }
     @PostMapping("/query")  //管理员查询所有用户
     public Result query(){
         List<User> list =  userMapper.selectList(null);

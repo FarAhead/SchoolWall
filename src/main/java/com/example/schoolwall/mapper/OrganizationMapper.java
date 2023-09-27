@@ -13,6 +13,8 @@ public interface OrganizationMapper extends BaseMapper<Organization> {
     public int update(int id,String name,String mail,String pwd);
     @Select("select * from organization where uid=#{uid}")
     public Organization selectById(long uid);
+    @Update("UPDATE organization SET zavatar = #{avatarUrl} WHERE uid = #{userId}")
+    void updateUserAvatar(@Param("userId") Long userId, @Param("avatarUrl") String avatarUrl);
     @Update("update organization set utype=1 where uid=#{id}")
     public int upd(int id);
     @Delete("delete from organization where uid=#{idd}")
