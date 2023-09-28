@@ -2,10 +2,11 @@ package com.example.schoolwall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.schoolwall.entity.Lik;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Update;
+import com.example.schoolwall.entity.Question;
+import com.example.schoolwall.entity.User;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 @Mapper
 public interface LikMapper extends BaseMapper<Lik> {
@@ -21,4 +22,17 @@ public interface LikMapper extends BaseMapper<Lik> {
 
     @Update("update lik set typ=2 where qid=#{qd} and uid=#{ud}") //收藏
     public int update2(int qd,long ud);
+
+    @Select("select * from lik where uid=#{uid}")
+    @Results({
+            @Result(column = "qid",property = "qid"),
+            @Result(column = "uid",property = "uid"),
+//            @Result(column = "id",property = "question",javaType = Question.class,
+//                    one = @One(select = "com.example.schoolwall.mapper.QuestionMapper.selectById")
+//            ),
+            @Result(column = "uid",property = "user",javaType = User.class,
+                    one = @One(select = "com.example.schoolwall.mapper.UserMapper.selectById")
+            ),
+    })
+    List<Lik> selectAll2(long uid);
 }

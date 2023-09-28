@@ -12,6 +12,8 @@ import java.util.List;
 @Mapper
 public interface QuestionMapper extends BaseMapper<Question> {
 
+    @Select("select * from question where qid=#{qid}")
+    public List<Question>  selectById(int qid);
     @Update("update question set qbrowsecount=qbrowsecount+1 where qid= #{id}") //访问量加一
     public int browse(int id);
     @Update("update question set qlikecount=qlikecount+1 where qid= #{id}") //赞同加一
@@ -65,4 +67,5 @@ public interface QuestionMapper extends BaseMapper<Question> {
             ),
     })
     List<Question> selectAll2(long id);
+
 }

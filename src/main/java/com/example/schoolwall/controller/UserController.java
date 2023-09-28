@@ -1,7 +1,9 @@
 package com.example.schoolwall.controller;
 
+import com.example.schoolwall.entity.Lik;
 import com.example.schoolwall.entity.Organization;
 import com.example.schoolwall.entity.User;
+import com.example.schoolwall.mapper.LikMapper;
 import com.example.schoolwall.mapper.OrganizationMapper;
 import com.example.schoolwall.mapper.UserMapper;
 import com.example.schoolwall.result.Result;
@@ -38,11 +40,12 @@ public class UserController {
         try {
             String originalFilename = file.getOriginalFilename();
             String filePath = uploadPath + File.separator + originalFilename;
+            String filePath2 = "http://localhost:8088/src/main/resources/head/"+ originalFilename;
             File dest = new File(filePath);
             file.transferTo(dest);
 
             // 构建文件的URL
-            String fileUrl = filePath; // 这里返回文件的绝对路径
+            String fileUrl = filePath2; // 这里返回文件的绝对路径
 
             // 更新数据库中用户的uavazar字段
             userMapper.updateUserAvatar(id, fileUrl);
@@ -62,11 +65,12 @@ public class UserController {
         try {
             String originalFilename = file.getOriginalFilename();
             String filePath = uploadPath2 + File.separator + originalFilename;
+            String filePath2 = "http://localhost:8088/src/main/resources/organization/" + originalFilename;
             File dest = new File(filePath);
             file.transferTo(dest);
 
             // 构建文件的URL
-            String fileUrl = filePath; // 这里返回文件的绝对路径
+            String fileUrl = filePath2; // 这里返回文件的绝对路径
 
             // 更新数据库中组织的zavazar字段
             organizationMapper.updateUserAvatar(id, fileUrl);

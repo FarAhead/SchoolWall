@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @MapperScan("com.example.schoolwall.mapper")      //用于扫描Mapper包
+
 public class SchoolWallApplication {
 
 	public static void main(String[] args) {

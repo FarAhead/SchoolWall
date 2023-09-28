@@ -1,0 +1,29 @@
+package com.example.schoolwall.controller;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.example.schoolwall.entity.Lik;
+import com.example.schoolwall.entity.Notice;
+import com.example.schoolwall.entity.User;
+import com.example.schoolwall.mapper.LikMapper;
+import com.example.schoolwall.mapper.UserMapper;
+import com.example.schoolwall.result.Result;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@CrossOrigin
+@RestController  //默认会将返回的对象数据转换成JSON格式
+@RequestMapping("/lik")
+public class LikController {
+    @Autowired
+    private LikMapper likMapper;
+
+    @Autowired
+    private UserMapper userMapper;
+    @PostMapping("query1")   //我的赞同
+    public Result query1(@RequestBody User user){
+        List list =  likMapper.selectAll2(user.getUid());
+        return Result.success(list);
+    }
+}

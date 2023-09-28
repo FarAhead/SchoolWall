@@ -25,7 +25,7 @@ public class LoginController {
     public Result login(@RequestBody User user){
         QueryWrapper<User> queryWrapper = new QueryWrapper<User>();
         queryWrapper.eq("uid",user.getUid());
-//        System.out.println("----------"+user.getUid()+"-----------------"+user.getUpwd());
+        System.out.println("----------"+user.getUid()+"-----------------"+user.getUpwd());
         List<User> list = userMapper.selectList(queryWrapper);
         if (list.isEmpty()) {
 //            System.out.println("error!--------------");

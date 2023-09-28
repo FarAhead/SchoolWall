@@ -27,6 +27,14 @@ public class CommodityController {
     @PostMapping("/add")   //用户发布商品
     public Result insert(@RequestBody Commodity commodity){
         int cnt = commodityMapper.insert(commodity);
+        Ord ord1 = new Ord();
+        ord1.setPrice(commodity.getPrice());
+        ord1.setOsid(commodity.getUid());
+        ord1.setCname(commodity.getCname());
+        ord1.setDescription(commodity.getDescription());
+        ord1.setCavatar(commodity.getCavatar());
+        ord1.setCid(commodity.getCid());
+        int cnt1 = ordMapper.insert(ord1);
         if(cnt>0){
             return Result.success();
         } else return Result.error();
@@ -39,11 +47,12 @@ public class CommodityController {
         try {
             String originalFilename = file.getOriginalFilename();
             String filePath = uploadPath + File.separator + originalFilename;
+            String filePath2 = "http://localhost:8088/src/main/resources/commodity/"  + originalFilename;
             File dest = new File(filePath);
             file.transferTo(dest);
 
             // 构建文件的URL
-            String fileUrl = filePath; // 这里返回文件的绝对路径
+            String fileUrl = filePath2; // 这里返回文件的绝对路径
 
             // 更新数据库中商品的cavazar字段
             commodityMapper.updateCAvatar(id, fileUrl);
@@ -67,7 +76,7 @@ public class CommodityController {
     @PostMapping("/buy") //购买商品
     public Result buy(@RequestBody Ord order1){
         int cnt1 = commodityMapper.buy(order1.getCid());
-        int cnt = ordMapper.insert(order1);
+        int cnt = ordMapper.insert1(order1.getCid(),order1.getObid(),order1.getOfinishdate());
         if(cnt>0){
             return Result.success();
         } else return Result.error();

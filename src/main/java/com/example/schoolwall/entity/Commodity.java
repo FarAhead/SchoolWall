@@ -15,5 +15,5 @@ public class Commodity {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Timestamp ctime = new Timestamp(System.currentTimeMillis());  //发布时间
     private int sold;  //是否被购买
-    private int ctype; //商品类型
+    private String ctype; //商品类型
 }
