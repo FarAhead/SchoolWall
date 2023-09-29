@@ -21,7 +21,7 @@ public class LikController {
 
     @Autowired
     private UserMapper userMapper;
-    @PostMapping("query1")   //我的赞同
+    @PostMapping("my")   //查询某人的收藏
     public Result query1(@RequestBody User user){
         List list =  likMapper.selectAll2(user.getUid());
         return Result.success(list);

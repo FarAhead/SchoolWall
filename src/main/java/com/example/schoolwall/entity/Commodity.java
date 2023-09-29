@@ -10,10 +10,10 @@ public class Commodity {
     private float price;
     private long uid;
     private String cname;
-    private String cavatar;
     private String description;  //描述
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Timestamp ctime = new Timestamp(System.currentTimeMillis());  //发布时间
     private int sold;  //是否被购买
+    private String cavatar;
     private String ctype; //商品类型
 }

@@ -24,6 +24,15 @@ public class OrdController {
             return Result.error();
         } else return Result.success(list);
     }
+    @PostMapping("del")   //删除某一订单
+    public Result del(@RequestBody Ord ord){
+        QueryWrapper<Ord> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("oid",ord.getOid());
+        int cnt = ordMapper.delete(queryWrapper);
+        if(cnt>0){
+            return Result.success();
+        } else return Result.error();
+    }
 
     @PostMapping("query1")   //某用户的买入
     public Result query1(@RequestBody Ord ord){

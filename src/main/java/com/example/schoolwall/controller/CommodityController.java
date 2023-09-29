@@ -3,6 +3,7 @@ package com.example.schoolwall.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.schoolwall.entity.Commodity;
 import com.example.schoolwall.entity.Ord;
+import com.example.schoolwall.entity.User;
 import com.example.schoolwall.mapper.CommodityMapper;
 import com.example.schoolwall.mapper.OrdMapper;
 import com.example.schoolwall.result.Result;
@@ -33,10 +34,13 @@ public class CommodityController {
         ord1.setCname(commodity.getCname());
         ord1.setDescription(commodity.getDescription());
         ord1.setCavatar(commodity.getCavatar());
-        ord1.setCid(commodity.getCid());
+        QueryWrapper<Commodity> queryWrapper = new QueryWrapper<Commodity>();
+        queryWrapper.eq("cname",commodity.getCname());
+        List<Commodity> list = commodityMapper.selectList(queryWrapper);
+        ord1.setCid(list.get(0).getCid());
         int cnt1 = ordMapper.insert(ord1);
         if(cnt>0){
-            return Result.success();
+            return Result.success(commodityMapper.getby(commodity.getCname()));
         } else return Result.error();
     }
 
@@ -82,5 +86,21 @@ public class CommodityController {
         } else return Result.error();
     }
 
+    @PostMapping("/up") //修改某商品价格
+    public Result buy(@RequestBody Commodity commodity){
+        int cnt1 = commodityMapper.up(commodity.getCid(),commodity.getPrice());
+        if(cnt1>0){
+            return Result.success();
+        } else return Result.error();
+    }
 
+    @PostMapping("del")   //删除某一商品
+    public Result del(@RequestBody Ord ord){
+        QueryWrapper<Commodity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("cid",ord.getCid());
+        int cnt = commodityMapper.delete(queryWrapper);
+        if(cnt>0){
+            return Result.success();
+        } else return Result.error();
+    }
 }

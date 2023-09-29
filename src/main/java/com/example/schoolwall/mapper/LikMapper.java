@@ -23,15 +23,12 @@ public interface LikMapper extends BaseMapper<Lik> {
     @Update("update lik set typ=2 where qid=#{qd} and uid=#{ud}") //收藏
     public int update2(int qd,long ud);
 
-    @Select("select * from lik where uid=#{uid}")
+    @Select("select * from lik where uid=#{uid} and typ=2")
     @Results({
             @Result(column = "qid",property = "qid"),
             @Result(column = "uid",property = "uid"),
-//            @Result(column = "id",property = "question",javaType = Question.class,
-//                    one = @One(select = "com.example.schoolwall.mapper.QuestionMapper.selectById")
-//            ),
-            @Result(column = "uid",property = "user",javaType = User.class,
-                    one = @One(select = "com.example.schoolwall.mapper.UserMapper.selectById")
+            @Result(column = "qid",property = "question",javaType = Question.class,
+                    one = @One(select = "com.example.schoolwall.mapper.QuestionMapper.selectById")
             ),
     })
     List<Lik> selectAll2(long uid);
