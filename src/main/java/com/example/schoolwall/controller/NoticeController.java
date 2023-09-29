@@ -44,10 +44,7 @@ public class NoticeController {
 
     @PostMapping("queryall")   //查询所有审核过的公告
     public Result query(){
-        QueryWrapper<Notice> queryWrapper = new QueryWrapper<Notice>();
-        queryWrapper.eq("checked",1);
-        List<Notice> list =  noticeMapper.selectList(queryWrapper);
-//        System.out.println(list);
+        List list =  noticeMapper.selectAll1();
         return Result.success(list);
     }
 

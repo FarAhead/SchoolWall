@@ -2,6 +2,7 @@ package com.example.schoolwall.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.example.schoolwall.entity.Organization;
+import com.example.schoolwall.entity.Question;
 import com.example.schoolwall.entity.User;
 import org.apache.ibatis.annotations.*;
 
@@ -13,6 +14,10 @@ public interface OrganizationMapper extends BaseMapper<Organization> {
     public int update(int id,String name,String mail,String pwd);
     @Select("select * from organization where uid=#{uid}")
     public Organization selectById(long uid);
+
+    @Select("select zname,uid,zavatar from organization where uid=#{qid}")
+    public List<Organization>  selectById(int qid);
+
     @Update("UPDATE organization SET zavatar = #{avatarUrl} WHERE uid = #{userId}")
     void updateUserAvatar(@Param("userId") Long userId, @Param("avatarUrl") String avatarUrl);
     @Update("update organization set utype=1 where uid=#{id}")

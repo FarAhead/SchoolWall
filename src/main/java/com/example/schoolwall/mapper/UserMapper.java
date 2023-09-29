@@ -23,6 +23,7 @@ public interface UserMapper extends BaseMapper<User> {   //mybatis plus 提供�
     @Select("SELECT * FROM user WHERE id = #{id}")
     User getUserById(Long id);
 
+
     @Update("UPDATE user SET uavatar = #{avatarUrl} WHERE uid = #{userId}")
     void updateUserAvatar(@Param("userId") Long userId, @Param("avatarUrl") String avatarUrl);
 

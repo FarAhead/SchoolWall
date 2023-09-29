@@ -1,5 +1,6 @@
 package com.example.schoolwall.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
@@ -14,4 +15,6 @@ public class Notice {
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Timestamp ntime = new Timestamp(System.currentTimeMillis());
     private int nbrowsecount;
+    @TableField(exist = false)
+    private Organization organization;
 }
