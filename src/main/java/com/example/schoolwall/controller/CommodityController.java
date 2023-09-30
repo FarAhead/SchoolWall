@@ -7,6 +7,7 @@ import com.example.schoolwall.entity.User;
 import com.example.schoolwall.mapper.CommodityMapper;
 import com.example.schoolwall.mapper.OrdMapper;
 import com.example.schoolwall.result.Result;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @CrossOrigin
@@ -34,6 +39,8 @@ public class CommodityController {
         ord1.setCname(commodity.getCname());
         ord1.setDescription(commodity.getDescription());
         ord1.setCavatar(commodity.getCavatar());
+        Timestamp ntime = new Timestamp(System.currentTimeMillis());
+        ord1.setOcreatedate(ntime);
         QueryWrapper<Commodity> queryWrapper = new QueryWrapper<Commodity>();
         queryWrapper.eq("cname",commodity.getCname());
         List<Commodity> list = commodityMapper.selectList(queryWrapper);
@@ -89,6 +96,7 @@ public class CommodityController {
     @PostMapping("/up") //修改某商品价格
     public Result buy(@RequestBody Commodity commodity){
         int cnt1 = commodityMapper.up(commodity.getCid(),commodity.getPrice());
+        int cnt2 = ordMapper.up(commodity.getCid(),commodity.getPrice());
         if(cnt1>0){
             return Result.success();
         } else return Result.error();

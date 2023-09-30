@@ -38,7 +38,7 @@ public interface QuestionMapper extends BaseMapper<Question> {
 
     @Update("update question set qreported=1 where qid=#{id} ")  //举报某一帖子
     public int repo(int id);
-    @Select("select * from question")
+    @Select("select * from question order by qtime DESC")
     @Results({
             @Result(column = "qid",property = "qid"),
             @Result(column = "uid",property = "uid"),

@@ -45,9 +45,9 @@ public class OrdController {
     }
     @PostMapping("query2")   //某用户的卖出
     public Result query2(@RequestBody Ord ord){
-        QueryWrapper<Ord> queryWrapper = new QueryWrapper<Ord>();
-        queryWrapper.eq("osid",ord.getOsid());
-        List<Ord> list = ordMapper.selectList(queryWrapper);
+//        QueryWrapper<Ord> queryWrapper = new QueryWrapper<Ord>();
+//        queryWrapper.eq("osid",ord.getOsid());
+        List list = ordMapper.selectList1(ord.getOsid());
         if(list.isEmpty()){
             return Result.error();
         } else return Result.success(list);

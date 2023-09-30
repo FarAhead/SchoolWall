@@ -19,4 +19,7 @@ public class Ord {
     private String cavatar; //商品图片
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Timestamp ofinishdate = new Timestamp(System.currentTimeMillis());
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
+    private Timestamp ocreatedate = new Timestamp(System.currentTimeMillis());
 }
