@@ -92,13 +92,13 @@ public class UserController {
     @PostMapping("/query1")  //根据uid查询用户名称头像
     public Result query1(@RequestBody User user){
         List list =  userMapper.selectAll1(user.getUid());
-        return Result.success(list);
+        return Result.success(list.get(0));
     }
 
     @PostMapping("/query2")  //根据uid查询组织名称头像
     public Result query2(@RequestBody Organization organization){
         List list =  organizationMapper.selectAll2(organization.getUid());
-        return Result.success(list);
+        return Result.success(list.get(0));
     }
 
     @PostMapping("/delete") //管理员根据用户id删除该用户

@@ -14,6 +14,9 @@ public interface NoticeMapper extends BaseMapper<Notice> {
     @Update("update notice set checked=1 where nid=#{id} ") //审核公告通过
     public int agr(int id);
 
+    @Update("update notice set ncontent=#{ncontent} where nid=#{nid} ") //修改公告内容
+    public int chang(int nid,String ncontent);
+
     @Select("select * from notice where checked=1")
     @Results({
             @Result(column = "nid",property = "nid"),

@@ -2,6 +2,7 @@ package com.example.schoolwall.mapper;
 
 import com.alibaba.druid.sql.dialect.oracle.ast.stmt.OracleCreateTableStatement;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.schoolwall.entity.Lik;
 import com.example.schoolwall.entity.Organization;
 import com.example.schoolwall.entity.Question;
 import com.example.schoolwall.entity.User;
@@ -32,6 +33,11 @@ public interface QuestionMapper extends BaseMapper<Question> {
     @Delete("delete from question where qid=#{id}")  //删除帖子
     public int del(int id);
 
+    @Update("update question set qreported=0 where qid=#{id} ")  //撤销举报
+    public int agre(int id);
+
+    @Update("update question set qreported=1 where qid=#{id} ")  //举报某一帖子
+    public int repo(int id);
     @Select("select * from question")
     @Results({
             @Result(column = "qid",property = "qid"),
@@ -67,5 +73,26 @@ public interface QuestionMapper extends BaseMapper<Question> {
             ),
     })
     List<Question> selectAll2(long id);
+
+
+    @Select("SELECT * FROM question q JOIN lik l ON q.qid = l.qid WHERE l.uid =#{uid} AND l.typ = 2")
+    @Results({
+            @Result(column = "qid",property = "qid"),
+            @Result(column = "uid",property = "uid"),
+            @Result(column = "uid",property = "user",javaType = User.class,
+                    one = @One(select = "com.example.schoolwall.mapper.UserMapper.selectById")
+            ),
+    })
+    List<Question> selectAll3(long uid);
+
+    @Select("SELECT * FROM question WHERE qreported=1")
+    @Results({
+            @Result(column = "qid",property = "qid"),
+            @Result(column = "uid",property = "uid"),
+            @Result(column = "uid",property = "user",javaType = User.class,
+                    one = @One(select = "com.example.schoolwall.mapper.UserMapper.selectById")
+            ),
+    })
+    List<Question> selectAll4();
 
 }

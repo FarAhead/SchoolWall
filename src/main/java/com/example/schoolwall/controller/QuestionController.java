@@ -131,11 +131,26 @@ public class QuestionController {
             return Result.success();
         } else return Result.error();
     }
-
-    @GetMapping("/querylike")
-    public Result li(){
-        List<Lik> list = likMapper.selectList(null);
+    @PostMapping("query2")   //管理员查询所有被举报的帖子
+    public Result query2(){
+        List<Question> list =  questionMapper.selectAll4();
         return Result.success(list);
+    }
+
+    @PostMapping("agree") //撤销举报
+    public Result agr(@RequestBody Question question){
+        int cnt = questionMapper.agre(question.getQid());
+        if(cnt>0){
+            return Result.success();
+        } else return Result.error();
+    }
+
+    @PostMapping("rep") //举报某帖子
+    public Result rep(@RequestBody Question question){
+        int cnt = questionMapper.repo(question.getQid());
+        if(cnt>0){
+            return Result.success();
+        } else return Result.error();
     }
 }
 

@@ -27,9 +27,9 @@ public interface LikMapper extends BaseMapper<Lik> {
     @Results({
             @Result(column = "qid",property = "qid"),
             @Result(column = "uid",property = "uid"),
-            @Result(column = "qid",property = "question",javaType = Question.class,
-                    one = @One(select = "com.example.schoolwall.mapper.QuestionMapper.selectById")
-            ),
+//            @Result(column = "qid",property = "question",javaType = Question.class,
+//                    one = @One(select = "com.example.schoolwall.mapper.QuestionMapper.selectById")
+//            ),
     })
     List<Lik> selectAll2(long uid);
 }

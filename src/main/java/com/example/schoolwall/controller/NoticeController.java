@@ -72,4 +72,11 @@ public class NoticeController {
         } else return Result.error();
     }
 
+    @PostMapping("change") //修改公告内容
+    public Result chang(@RequestBody Notice notice){
+        int cnt = noticeMapper.chang(notice.getNid(),notice.getNcontent());
+        if(cnt>0){
+            return Result.success();
+        } else return Result.error();
+    }
 }
